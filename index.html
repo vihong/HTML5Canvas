@@ -5,13 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans&display=swap" rel="stylesheet">
     <title>HTML5 Canvas</title>
 </head>
 
 <body>
+    <div>
+        <h1 class="title">Picasso App'</h1>
+        <p class="description">( Draw on the white board below )</p>
+    </div>
     <canvas id="draw" width="800" height="800"></canvas>
     <script>
 const canvas = document.querySelector('#draw');
+const context = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+context.strokeStyle = '#BADA55';
+context.lineJoin = 'round';
+context.lineCap = 'round';
+context.lineWidth = 50;
+
+let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
+let hue = 0;
+let direction = true;
+
+
+function draw(event){
+    if(!isDrawing)
+        return ;
+    context.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    context.beginPath();
+    context.moveTo(lastX, lastY);
+    context.lineTo(event.offsetX, event.offsetY);
+    context.stroke();
+    [lastX, lastY] = [event.offsetX, event.offsetY];
+    hue++;
+    // if (hue >= 360) {hue = 0;}
+
+    if (context.lineWidth >= 50 || context.lineWidth <= 1){
+        direction = !direction;
+    }
+
+    direction == true ? context.lineWidth++ : context.lineWidth--;
+}
+
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mousedown', () => {
+    isDrawing = true;
+    [lastX, lastY] = [event.offsetX, event.offsetY];
+
+});
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
 
     </script>
 
@@ -20,6 +68,39 @@ const canvas = document.querySelector('#draw');
         body {
             margin: 0;
             background-color: lightcoral;
+            background-image: url(https://images.pexels.com/photos/253682/pexels-photo-253682.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+            background-size: cover;
+            background-position: center;
+            background-repeat: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Bubblegum Sans', cursive;
+            text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+
+        }
+
+        .title{
+            /* border: 1px solid black; */
+            font-size: 5rem;
+            color: gold;
+            padding: 0;
+        }
+
+        .description{
+            text-align: center;
+            color: gold;
+            font-size: 1.5rem;
+            position: relative;
+            top: -10px;
+            
+        }
+
+        #draw{
+            margin: 10px 20px 10% 20px;
+            border: 5px solid brown;
+            background: #fff;
         }
     </style>
 
