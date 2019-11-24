@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/a02232ab8e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans&display=swap" rel="stylesheet">
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Circle-icons-paintbrush.svg/512px-Circle-icons-paintbrush.svg.png">
     <title>Picasso App</title>
@@ -13,7 +14,7 @@
 <body>
     <div>
         <h1 class="title">Picasso App'</h1>
-        <p class="description">( Draw on the white board below )</p>
+        <p class="description">Use your mouse and draw on the white board below <i  style="color: black" class="fas fa-paint-brush"></i></p>
     </div>
     <canvas id="draw" width="800" height="800"></canvas>
     <script>
@@ -78,7 +79,6 @@ canvas.addEventListener('mouseout', () => isDrawing = false);
             justify-content: center;
             align-items: center;
             font-family: 'Bubblegum Sans', cursive;
-            text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
 
         }
 
@@ -87,6 +87,9 @@ canvas.addEventListener('mouseout', () => isDrawing = false);
             font-size: 5rem;
             color: gold;
             padding: 0;
+            text-align: center;
+            text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+
         }
 
         .description{
@@ -95,7 +98,11 @@ canvas.addEventListener('mouseout', () => isDrawing = false);
             font-size: 1.5rem;
             position: relative;
             top: -10px;
-            
+            text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+        }
+
+        .description i{
+            text-shadow: none;
         }
 
         #draw{
